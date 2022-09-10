@@ -5,35 +5,54 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-TicTacToeGame::TicTacToeGame()
+TicTacToeGame::TicTacToeGame() : width_( 3 ), height_( 3 )
 {
-   fields_ = new char* [ size_ ];
-   for( int i = 0; i < size_; i++ )
+   fields_ = new char* [ height_ ];
+   for( int i = 0; i < height_; i++ )
    {
-       fields_[ i ] = new char [ size_];
+       fields_[ i ] = new char [ width_];
    }
 
-   char field = '1';
-   for( int i = 0; i < size_; i++ )
+   char number= '1';
+   for( int y = 0; y < height_; y++ )
    {
-       for( int j = 0; j < size_; j++ )
+       for( int x = 0; x < width_; x++ )
        {
-           fields_[ i ][ j ] = field++;
+           fields_[ y ][ x ] = number++;
        }
    }
 }
 
 void TicTacToeGame::gameBoard()
 {
-    cout << "   |   |   \n";
-    cout << " " << fields_[ 0 ][ 0 ] << " | " << fields_[ 0 ][ 1 ] << " | " << fields_[ 0 ][ 2 ] << " \n";
-    cout << "   |   |   \n";
-    cout << "--- --- ---\n";
-    cout << "   |   |   \n";
-    cout << " " << fields_[ 1 ][ 0 ] << " | " << fields_[ 1 ][ 1 ] << " | " << fields_[ 1 ][ 2 ] << " \n";
-    cout << "   |   |   \n";
-    cout << "--- --- ---\n";
-    cout << "   |   |   \n";
-    cout << " " << fields_[ 2 ][ 0 ] << " | " << fields_[ 2 ][ 1 ] << " | " << fields_[ 2 ][ 2 ] << " \n";
-    cout << "   |   |   \n";
+
+
+    for( int y = 0; y < height_ * 4 - 1; y++ )
+    {
+        for( int x = 0; x < width_ * 4 - 1; x++ )
+        {
+            if( ( y % 4 == 0 || y % 4 == 1 || y % 4 == 2 ) && x % 4 == 3)//1, 2 and 3 row
+            {
+                putchar('|');
+            }
+            else if( ( y % 4 == 0 || y % 4 == 1 || y % 4 == 2 ) && x % 4 != 3 ) //1, 2 and 3 row
+            {
+                putchar(' ');
+            }
+            else if( y % 4 == 3 && x % 4 != 3 )
+            {
+                putchar('-');
+            }
+            else if( y % 4 == 3 && x % 4 == 3 )
+            {
+                putchar(' ');
+            }
+
+            if( x == width_ * 4 - 2 )
+            {
+                putchar('\n');
+            }
+        }
+    }
+
 }

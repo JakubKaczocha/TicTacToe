@@ -10,7 +10,8 @@ public:
 
 private:
     char** fields_;
-    const int size_ = 3;
+    const int width_, height_;
+    char move_ = 'X';
 };
 
 #endif // TICTACTOEGAME_H
