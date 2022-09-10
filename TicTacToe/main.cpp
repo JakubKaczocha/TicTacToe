@@ -1,9 +1,13 @@
 #include <iostream>
+#include "tictactoegame.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    TicTacToeGame prototype;
+
+    prototype.gameBoard();
+
     return 0;
 }

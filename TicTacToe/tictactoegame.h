@@ -6,9 +6,10 @@ class TicTacToeGame
 {
 public:
     TicTacToeGame();
+    void gameBoard();
 
 private:
-    int** fields_;
+    char** fields_;
     const int size_ = 3;
 };
 
