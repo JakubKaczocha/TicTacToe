@@ -1,6 +1,7 @@
 #include "tictactoegame.h"
 #include <iostream>
 #include <limits>
+#include <windows.h>
 
 using std::cout;
 using std::endl;
@@ -29,16 +30,16 @@ TicTacToeGame::TicTacToeGame() : width_( 3 ), height_( 3 )
 }
 void TicTacToeGame::gameInterface()
 {
-    cout << "\t\t           *TIC TAC TOE*\n" << endl;
 
-    cout << "\t\t          1.Player vs AI" << endl;
-    cout << "\t\t        2.Player vs Player" << endl;
-    cout << "\t\t              3.EXIT" << endl << endl;
 
     int choose;
     do
     {
+        cout << "\t\t           *TIC TAC TOE*\n" << endl;
 
+        cout << "\t\t          1.Player vs AI" << endl;
+        cout << "\t\t        2.Player vs Player" << endl;
+        cout << "\t\t              3.EXIT" << endl << endl;
         cout << "Choose: ";
 
         cin >> choose;
@@ -48,15 +49,93 @@ void TicTacToeGame::gameInterface()
             cin.clear();
             cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
         }
-
-
-
-
+        system("CLS");
     } while( choose != 1 && choose != 2 && choose != 3 );
 
+    switch ( choose )
+    {
+    case 1:
+
+        playerVsAI();
+        break;
+    case 2:
+
+        playerVsPlayer();
+    case 3:
+
+        cout << "thanks for playing :)\n";
+        return;
+    }
 
 
+}
 
+void TicTacToeGame::playerVsPlayer()
+{
+    int turns = width_ * height_;
+    for( int i = 0; i < turns; i++ )
+    {
+        gameBoard();
+        selectField();
+        system("CLS");
+    }
+    gameBoard();
+}
+void TicTacToeGame::playerVsAI()
+{
+    cout << "player vs AI\n\n";
+}
+void TicTacToeGame::selectField()
+{
+    char choose;
+
+    do
+    {
+        cout << move_ << " turn, select the field: ";
+        cin >> choose;
+        if( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore( std::numeric_limits< std::streamsize >::max() );
+        }
+
+    }while( !isFree( choose ) );
+
+    if( move_ == 'X' )
+    {
+        move_ = 'O';
+    }
+    else if( move_ == 'O')
+    {
+        move_ = 'X';
+    }
+    else
+    {
+        cout << "invorrect value of variable move_ ";
+    }
+}
+
+bool TicTacToeGame::isFree( char choose )
+{
+    if ( choose == 'X' || choose == 'O' )
+    {
+        return 0;
+    }
+
+    for( int i = 0; i < height_; i++ )
+    {
+        for( int j = 0; j < width_; j++ )
+        {
+            if( fields_[ i ][ j ] == choose )
+            {
+                fields_[ i ][ j ] = move_;
+                return 1;
+            }
+        }
+    }
+
+
+    return 0;
 }
 void TicTacToeGame::gameBoard()
 {
