@@ -7,10 +7,10 @@ class TicTacToeGame
 public:
     TicTacToeGame();
     void gameBoard();
-
+    void gameInterface();
 private:
     char** fields_;
-    const int width_, height_;
+    int width_, height_;
     char move_ = 'X';
 };
 

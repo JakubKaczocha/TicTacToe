@@ -6,8 +6,8 @@ using namespace std;
 int main()
 {
     TicTacToeGame prototype;
-
-    prototype.gameBoard();
+    prototype.gameInterface();
+    //prototype.gameBoard();
 
     return 0;
 }
